@@ -1,7 +1,6 @@
 with open("input.txt", "r") as file:
     sum = 0
     for line in file:
-        possible = True
         game_num, game = line.split(":")
         game_num = int(game_num.split(" ")[1])
         sets = game.split(";")
@@ -19,12 +18,6 @@ with open("input.txt", "r") as file:
         min_red_list = max(red_list) if len(red_list) > 0 else 0
         min_blue_list = max(blue_list) if len(blue_list) > 0 else 0
         power = min_green_list * min_red_list * min_blue_list
-        print(line)
-        print(power)
-        print(f"min green: {min_green_list}")
-        print(f"min blue: {min_blue_list}")
-        print(f"min red: {min_red_list}")
         sum += power
-
 
     print(sum)

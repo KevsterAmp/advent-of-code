@@ -1,3 +1,9 @@
+#aoc
+input*
+test*
+puzzle_input*
+puzzle*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

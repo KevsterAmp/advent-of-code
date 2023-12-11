@@ -10,7 +10,6 @@ card_str = {
 def main():
     with open("input.in", "r") as file:
         lines = file.read().split("\n")
-
     card2bid = [line.split() for line in lines]
     print(len(lines))
     x = calibrate(card2bid)

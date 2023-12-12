@@ -27,8 +27,8 @@ def get_histories(line):
     # return as list of lists
     return all_histories
 
-def part1():
 
+def part1():
     # function to calculate the total score of the top list
     def get_top_score(histories):
         # calculate top score starting from -1 of list
@@ -43,7 +43,6 @@ def part1():
                 histories[i].append(end)
 
         return histories[-1][-1]
-                
 
     # first, calibrate lines
     calibrated = calibrate(lines)
@@ -63,10 +62,10 @@ def part2():
         # calculate top score starting from -1 of list
         histories.reverse()
         for i, numbers in enumerate(histories):
-            # if all elements in numbers is equal, the top score is the same
+            # if all elements in numbers is equal, the bottom score is the same
             if i == 0: histories[i].insert(0, numbers[0])
     
-            # else, the topscore is by numbers[-1] + histories[i+1][-1] 
+            # else, the bottom score is by numbers[-1] + histories[i+1][-1] 
             else:
                 end = numbers[0] - histories[i-1][0]
                 histories[i].insert(0, end)
@@ -87,7 +86,6 @@ def part2():
         output_sum += test
 
     return output_sum 
-    
 
 
 if __name__ in "__main__":

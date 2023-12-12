@@ -1,59 +1,45 @@
+from itertools import cycle
+import math
 import re
 
 
-with open("test.in", "r") as file:
-    lines = file.read().split("\n")
+with open("input.in", "r") as file:
+    lines = file.read()
+    direction, maps = lines.split("\n\n")
+    direction = cycle(0 if x == "L" else 1 for x in direction)
+    clean_maps = {}
+    regex = r'(\w{3}) = \((\w{3}), (\w{3})\)'
+
+    for start, left, right in re.findall(regex, maps):
+        clean_maps[start] = [left, right]
 
     
 def part1():
-    direction = lines[0]
+    output = 0
+    node = "AAA"
+    for x in direction:
+        output += 1
+        node = clean_maps[node][x]
+        if node == "ZZZ":
+            break
 
-    def calibrate(lines): 
-        guide = lines[2:]
-        orig, l, r = [], [], []
-        pattern = r'\(([^,]+), ([^)]+)\)'
-        for line in guide:
-            # get orig, l, r
-            temp = line.split("=")
-            orig.append(temp[0].strip())
-            x, y = temp[1].replace("(", "").replace(")", "").split(",")
-            l.append(x.strip())
-            r.append(y.strip())
-
-        return orig, l, r
-
-    def get_steps(orig, l, r):
-        steps = 0
-        curr = orig[0]
-        print(f"end: {orig[-1]}")
-        print(f"Curr: {curr}")
-        while curr != orig[-1]:
-            # get the index of the orig placement depending on the guide
-            for x in direction:
-                # for debugging
-
-                if x == "L":
-                    lr = l
-                elif x == "R":
-                    lr = r
-                else: 
-                    return "error"
-                # get the index of curr
-                i = orig.index(curr)
-                # using that index, get the direction depending if L or R
-                points_to = lr[i]
-                curr_i = orig.index(points_to)
-                curr = orig[curr_i]
-                steps += 1
-        
-        return steps
-
-    orig, l, r = calibrate(lines)
-    return get_steps(orig, l, r)
-
+    return output # type: ignore
 
 def part2():
-    pass
+    node_a = [node for node in list(clean_maps.keys()) if node[-1] == "A"] # the starting nodes
+    steps4node = []
+    for node in node_a:
+        steps = 0
+        for x in direction:
+            steps += 1
+            node = clean_maps[node][x]
+
+            if node[-1] == "Z":
+                steps4node.append(steps)
+                break
+
+    return math.lcm(*steps4node)
+
 
 if __name__ in "__main__":
     print(f"Part 1: {part1()}")

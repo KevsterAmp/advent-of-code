@@ -15,7 +15,7 @@ def part1():
             output.append([records, clean_guide])
 
         return output
-    
+
     def find_arrangements(line):
         arr_num = 0
         record = line[0]
@@ -33,7 +33,7 @@ def part1():
             # substitute the ? on the record on the algo
             for element in algo:
                 temp = temp.replace("?", element, 1)
-            
+
             # split the record by .
             temp = temp.split(".")
 
@@ -73,7 +73,6 @@ def part1():
     calibrated = calibrate(lines)
     total = 0
     for i, x in enumerate(calibrated):
-        print(f"{i =}")
         total +=  find_arrangements(x)
        
     return total
@@ -84,5 +83,5 @@ def part2():
 
 
 if __name__ in "__main__":
-    print(part1())
-    print(part2())
+    print(f"{part1() = }")
+    print(f"{part2() = }")

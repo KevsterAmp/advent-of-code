@@ -17,12 +17,12 @@ func main() {
 	check(err)
 
 	contentStr := string(content)
-	fmt.Println(contentStr)
+	// fmt.Println(contentStr)
 
 	// get horizontal
 	data := strings.Split(contentStr, "\n")
 	data = data[:len(data)-1]
-	fmt.Println("data: ", data)
+	// fmt.Println("data: ", data)
 
 	match := 0
 	dataLen := len(data)
@@ -32,9 +32,9 @@ func main() {
 			if SoftMatch(i, j, data) == true && HardMatch(i, j, data) == true {
 				match++
 			}
-			fmt.Println("Match: ", match)
 		}
 	}
+	fmt.Println("Match: ", match)
 
 }
 

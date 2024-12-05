@@ -65,6 +65,8 @@ func FilterGuide(guide []string, numSlice []string) []string {
 
 // func verify
 // for x in filtered guides
+// if there are filetered guides that does not exist on created pairs
+// number is not properly sorted
 func Verify(g []string, n []string) bool {
 	for _, x := range g {
 		if In(x, n) == false {
@@ -74,9 +76,6 @@ func Verify(g []string, n []string) bool {
 	return true
 }
 
-// if there are filetered guides that does not exist on created pairs
-// number is not properly sorted
-//
 // func createpairs
 // function to create pairs of numbers with each other
 func CreatePairs(numSlice []string) []string {

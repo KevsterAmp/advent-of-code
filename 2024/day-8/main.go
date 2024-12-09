@@ -30,6 +30,9 @@ func main() {
 		CreateAntinodes(pairs, freshGrid)
 	}
 	count := GetAntinodeCount(freshGrid)
+	for _, line := range freshGrid {
+		fmt.Println(line)
+	}
 	fmt.Println("Count: ", count)
 }
 
@@ -81,25 +84,52 @@ func CreateAntinodes(pairs [][][]int, grid []string) {
 		// fmt.Println("Pairs: ", pair)
 		xDiff := GetDiff(aPair[0], bPair[0])
 		yDiff := GetDiff(aPair[1], bPair[1])
-		// fmt.Println("diffs: ", xDiff, yDiff)
-		antinodes := [][]int{
-			make([]int, 2),
-			make([]int, 2),
-		}
-		for i := 0; i < 2; i++ {
-			g := aPair[i] >= bPair[i]
-			if g && i == 0 {
-				antinodes[0][i] = aPair[i] + xDiff
-				antinodes[1][i] = bPair[i] - xDiff
-			} else if g == false && i == 0 {
-				antinodes[0][i] = aPair[i] - xDiff
-				antinodes[1][i] = bPair[i] + xDiff
-			} else if g && i == 1 {
-				antinodes[0][i] = aPair[i] + yDiff
-				antinodes[1][i] = bPair[i] - yDiff
-			} else if g == false && i == 1 {
-				antinodes[0][i] = aPair[i] - yDiff
-				antinodes[1][i] = bPair[i] + yDiff
+		fmt.Println("diffs: ", xDiff, yDiff)
+		var antinodes [][]int
+		// for i := 0; i < 2; i++ {
+		// 	g := aPair[i] >= bPair[i]
+		// 	if g && i == 0 {
+		// 		antinodes[0][i] = aPair[i] + xDiff
+		// 		antinodes[1][i] = bPair[i] - xDiff
+		// 	} else if g == false && i == 0 {
+		// 		antinodes[0][i] = aPair[i] - xDiff
+		// 		antinodes[1][i] = bPair[i] + xDiff
+		// 	} else if g && i == 1 {
+		// 		antinodes[0][i] = aPair[i] + yDiff
+		// 		antinodes[1][i] = bPair[i] - yDiff
+		// 	} else if g == false && i == 1 {
+		// 		antinodes[0][i] = aPair[i] - yDiff
+		// 		antinodes[1][i] = bPair[i] + yDiff
+		// 	}
+		// }
+
+		for j := 1; j < len(grid); j++ {
+			tempNode := [][]int{
+				make([]int, 2),
+				make([]int, 2),
+			}
+			for i := 0; i < 2; i++ {
+				g := aPair[i] >= bPair[i]
+				fmt.Println("aPair[i]", aPair[i])
+				fmt.Println("bPair[i]", bPair[i])
+				if g && i == 0 {
+					tempNode[0][i] = aPair[i] + xDiff*j
+					tempNode[1][i] = bPair[i] - xDiff*j
+				} else if g == false && i == 0 {
+					tempNode[0][i] = aPair[i] - xDiff*j
+					tempNode[1][i] = bPair[i] + xDiff*j
+				} else if g && i == 1 {
+					tempNode[0][i] = aPair[i] + yDiff*j
+					tempNode[1][i] = bPair[i] - yDiff*j
+				} else if g == false && i == 1 {
+					tempNode[0][i] = aPair[i] - yDiff*j
+					tempNode[1][i] = bPair[i] + yDiff*j
+				}
+			}
+			fmt.Println("tempNode: ", tempNode)
+			if len(tempNode) == 2 {
+				// fmt.Println("tempNode: ", tempNode)
+				antinodes = append(antinodes, tempNode...)
 			}
 		}
 		for _, node := range antinodes {
@@ -138,7 +168,7 @@ func GetAntinodeCount(grid []string) int {
 	count := 0
 	for _, line := range grid {
 		for _, c := range line {
-			if string(c) == "#" {
+			if string(c) != "." {
 				count++
 			}
 		}

@@ -13,32 +13,12 @@ func main() {
 	input := string(content)
 	matrix := ToMap(input)
 	zeroes := FindStart(matrix)
-	PartOne(zeroes, matrix)
-	PartTwo(zeroes, matrix)
-}
-func PartTwo(zeroes [][]int, matrix [][]int) {
-	total := 0
-	for _, zero := range zeroes {
-		results := [][]int{zero}
-		for i := 0; i < 9; i++ {
-			temp_res := [][]int{}
-			for _, result := range results {
-				res := SearchNextLevel(matrix, result)
-				for _, x := range res {
-					temp_res = append(temp_res, x)
-				}
-			}
-			results = temp_res
-			if i == 8 {
-				total += len(results)
-			}
-		}
-	}
-	fmt.Println("part 2: ", total)
+	GetTrailheads(zeroes, matrix)
 }
 
-func PartOne(zeroes [][]int, matrix [][]int) {
-	total := 0
+func GetTrailheads(zeroes [][]int, matrix [][]int) {
+	totalPartOne := 0
+	totalPartTwo := 0
 	for _, zero := range zeroes {
 		results := [][]int{zero}
 		for i := 0; i < 9; i++ {
@@ -48,15 +28,16 @@ func PartOne(zeroes [][]int, matrix [][]int) {
 				for _, x := range res {
 					temp_res = append(temp_res, x)
 				}
-				temp_res = removeDuplicates(temp_res)
 			}
 			results = temp_res
 			if i == 8 {
-				total += len(results)
+				totalPartOne += len(removeDuplicates(results))
+				totalPartTwo += len(results)
 			}
 		}
 	}
-	fmt.Println("part 1: ", total)
+	fmt.Println("part 1: ", totalPartOne)
+	fmt.Println("part 2: ", totalPartTwo)
 }
 
 func ToMap(t string) [][]int {

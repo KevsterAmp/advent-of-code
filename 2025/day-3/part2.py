@@ -29,21 +29,3 @@ for bank in lines:
     print(f"{str_int=}")
     sum_joltage += int(str_int)
 print(f"{sum_joltage=}")
-#         if len(bank_list) < 12:
-#             break
-#
-#         for num in bank_list:
-#             joltage = int(bank[i] + num)
-#             print(joltage)
-#             # print(curr_highest)
-#             if joltage > curr_highest:
-#                 curr_highest = joltage
-#                 print(f"new {curr_highest=}")
-#     print(f"{curr_highest=}")
-#     sum += curr_highest
-# print(sum)
-
-
-# find the highest in the range of len(bank_list) - 12
-# pop all values on the left of the highest num
-# repeat on range of len(bank_list) - 11

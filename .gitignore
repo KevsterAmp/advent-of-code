@@ -1,5 +1,7 @@
 .DS_STORE
+
 #aoc
+*.txt
 input*
 test*
 puzzle_input*

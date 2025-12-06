@@ -46,6 +46,7 @@ for i, j in enumerate(match_len):
     length_len.append([start, end])
 print(f"{length_len=}")
 
+# split the numbers based on the range
 normalized_list = []
 for line in normalized:
     norm = []
